@@ -12,7 +12,7 @@ app.engine('hbs', hbs.__express);
 var config = {
     token: 'cycweixin',
     appid: 'wxfd5c42c5c6ec5e3b',
-    encodingAESKey: '66ed6627cc20206223ecc2c9b6ab3e99'
+    encodingAESKey: 'ILcPKgWv0mWxXpmVzJnSTWBWVza0Kg4rOhmSoIywf4v'
 };
 
 
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.use('/wechat', wechat(config, function (req, res, next) {
-
+        console.log(req.weixin);
         res.reply({
             content: '来自cycok.com的信息',
             type: 'text'
