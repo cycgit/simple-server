@@ -1,0 +1,27 @@
+{
+  "name": "simple-server",
+  "version": "1.0.0",
+  "description": "简单的微信后台",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cycgit/simple-server.git"
+  },
+  "author": "cyc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cycgit/simple-server/issues"
+  },
+  "homepage": "https://github.com/cycgit/simple-server#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "hbs": "^3.1.1",
+    "request": "^2.65.0",
+    "send": "^0.13.0",
+    "wechat": "^2.0.2"
+  }
+}
