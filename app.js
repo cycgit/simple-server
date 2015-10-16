@@ -12,32 +12,26 @@ app.engine('hbs', hbs.__express);
 var config = {
     token: 'cycweixin',
     appid: 'wxfd5c42c5c6ec5e3b',
-    encodingAESKey: '66ed6627cc20206223ecc2c9b6ab3e99'
+    encodingAESKey: 'ILcPKgWv0mWxXpmVzJnSTWBWVza0Kg4rOhmSoIywf4v'
 };
 
 
-app.use(express.query());
+//app.use(express.query());
 app.use('/static', express.static('static',{Mixed: false}));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-
-app.use('/wechat', wechat(config, function (req, res, next) {
-
+app.use('/get', wechat(config, function (req, res, next) {
+    console.log(req.weixin);
         res.reply({
-            content: '来自cycok.com的信息',
+            content: '你好来自的信息',
             type: 'text'
         });
 
 })
 
 );
-app.use(function (req, res, next) {
-    console.log(req.path);
-    console.log(req.body);
-    console.log('   ');
-    next();
-});
+
 
 
 
