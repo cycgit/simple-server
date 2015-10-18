@@ -1,9 +1,14 @@
+'use strict';
 var express = require('express');
 var hbs = require('hbs');
 var send = require('send');
 var bodyParser = require('body-parser');
 var app = express();
-var wechat = require('wechat');
+var resolve = require('path').resolve;
+//var wechat = require('wechat');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 app.set('view engine', 'hbs');
 app.set('views', 'views');
@@ -15,30 +20,74 @@ var config = {
     encodingAESKey: 'ILcPKgWv0mWxXpmVzJnSTWBWVza0Kg4rOhmSoIywf4v'
 };
 
+//
+//app.use(session({
+//    store: new RedisStore(options),
+//    secret: 'cyc'
+//}));
 
-app.use(express.query());
-app.use('/static', express.static('static',{Mixed: false}));
-
+app.use('/static', express.static('static', {Mixed: false}));
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
 
 
-app.use('/wechat', wechat(config, function (req, res, next) {
-        console.log(req.weixin);
-        res.reply({
-            content: '来自cycok.com的信息',
-            type: 'text'
-        });
+app.use(session({
+    store: new RedisStore({
+        host: "121.40.221.49",
+        port: 6379,
+        db: 0
+    }),
+    resave: true,
+    saveUninitialized: true,
+    secret: 'cyc'
+}));
 
-})
 
-);
-app.use(function (req, res, next) {
-    console.log(req.path);
-    console.log(req.body);
-    console.log('   ');
-    next();
+
+
+
+app.get('/', function (req, res) {
+    if (req.cookies.login == 1) {
+        res.redirect('/show');
+    } else {
+        res.render('home', req.session);
+    }
+
 });
 
+
+
+app.get('/show', function (req, res) {
+    if(req.cookies.login == 1) {
+        res.render('show', req.session);
+    }else{
+        res.redirect('/');
+    }
+});
+
+
+app.get('/set', function (req, res) {
+    res.cookie('login', 1, {maxAge: 900000, });
+    res.cookie('name', 'cyc', {maxAge: 900000, });
+    req.session.sname = '成';
+    res.send('ok');
+});
+
+app.get('/logout', function (req, res) {
+    res.clearCookie('login');
+    res.clearCookie('name');
+
+
+    //req.session.destroy(function (err) {
+    //});
+    res.redirect('/');
+
+});
+
+app.get('/do', function (req, res) {
+
+    res.download('app.js');
+});
 
 
 app.get('/check', function (req, res) {
@@ -54,13 +103,13 @@ app.use(function (req, res) {
 
 app.use(function (err, req, res, next) {
     res.status(500);
-    res.send(err);
+    res.send('错误');
 });
 
 var env = process.env.NODE_ENV || 'development';
 
-var port = env == 'development'? 4000: 80;
+var port = env == 'development' ? 4000 : 80;
 
 app.listen(port, function () {
     console.log('app start port: ' + port);
-})
+});

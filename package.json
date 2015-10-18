@@ -18,8 +18,12 @@
   "homepage": "https://github.com/cycgit/simple-server#readme",
   "dependencies": {
     "body-parser": "^1.14.1",
+    "connect-redis": "^3.0.1",
+    "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
+    "express-session": "^1.11.3",
     "hbs": "^3.1.1",
+    "redis": "^2.2.3",
     "request": "^2.65.0",
     "send": "^0.13.0",
     "wechat": "^2.0.2"
