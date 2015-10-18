@@ -43,9 +43,6 @@ app.use(session({
 }));
 
 
-
-
-
 app.get('/', function (req, res) {
     if (req.cookies.login == 1) {
         res.redirect('/show');
@@ -56,19 +53,16 @@ app.get('/', function (req, res) {
 });
 
 
-
 app.get('/show', function (req, res) {
-    if(req.cookies.login == 1) {
+    if (req.cookies.login == 1) {
         res.render('show', req.session);
-    }else{
+    } else {
         res.redirect('/');
     }
 });
-
-
 app.get('/set', function (req, res) {
-    res.cookie('login', 1, {maxAge: 900000, });
-    res.cookie('name', 'cyc', {maxAge: 900000, });
+    res.cookie('login', 1, {maxAge: 900000,});
+    res.cookie('name', 'cyc', {maxAge: 900000,});
     req.session.sname = '成';
     res.send('ok');
 });
@@ -91,7 +85,7 @@ app.get('/do', function (req, res) {
 
 
 app.get('/check', function (req, res) {
-    var msg = req.query.echostr
+    var msg = req.query.echostr;
     res.send(msg);
 });
 
