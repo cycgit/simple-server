@@ -20,6 +20,8 @@ var config = {
     encodingAESKey: 'ILcPKgWv0mWxXpmVzJnSTWBWVza0Kg4rOhmSoIywf4v'
 };
 
+//0D3CED9BEC10A777AEC23CCC353A8C08A633045E
+
 //
 //app.use(session({
 //    store: new RedisStore(options),
@@ -35,7 +37,7 @@ app.use(session({
     store: new RedisStore({
         host: "121.40.221.49",
         port: 6379,
-        db: 0
+        db:0
     }),
     resave: true,
     saveUninitialized: true,
@@ -49,6 +51,11 @@ app.get('/', function (req, res) {
     } else {
         res.render('home', req.session);
     }
+
+});
+
+app.get('/don',  function(req, res){
+    res.render('don');
 
 });
 
@@ -80,7 +87,7 @@ app.get('/logout', function (req, res) {
 
 app.get('/do', function (req, res) {
 
-    res.download('app.js');
+    //res.download('app.js');
 });
 
 

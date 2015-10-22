@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style>
+        *{margin:0px;padding:0px;}
+        body{background: #c6e6fd;}
+        .logo{padding-bottom:20px;}
+        .cont{width: 800px;margin: auto;overflow: hidden;padding:50px;}
+        img{display: block;margin:auto;}
+        .mobile{float: left;}
+        .qrcode{padding:20px 0px;}
+    </style>
+</head>
+
+<body>
+
+<div class="cont" style="display:none;" id="cont">
+    <div class="logo"><img src="/static/tg.png"></div>
+    <div class="mobile"><img src="/static/phone.png"></div>
+    <div class="Tab"><img src="/static/android.png"></div>
+    <div class="qrcode"><img src="/static/iosQrcode.png"></div>
+    <div class="Tab"><img src="/static/ios.png"></div>
+    <div class="qrcode"><img src="/static/androidQrcode.png"></div>
+</div>
+
+
+<script>
+    (function(){
+        var userAgentInfo = navigator.userAgent;
+        if(userAgentInfo.indexOf("Android")!=-1){
+            //andorid
+            console.log("Android")
+        }else if(userAgentInfo.indexOf("iPhone")!=-1||userAgentInfo.indexOf("iPad")!=-1){
+            //ios
+            console.log("ios");
+        }else{
+            document.getElementById("cont").style.display="block";
+        }
+    })();
+</script>
+
+</body>
+</html>
